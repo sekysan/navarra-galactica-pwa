@@ -1,8 +1,8 @@
 {
   "name": "Navarra y Galáctica",
   "short_name": "NavarraGal",
-  "start_url": "/",
-  "scope": "/",
+  "start_url": "./",
+  "scope": "./",
   "description": "Guía de viaje familiar: Navarra y la experiencia Galáctica",
   "display": "standalone",
   "background_color": "#ffffff",

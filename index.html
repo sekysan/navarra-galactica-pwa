@@ -5,18 +5,18 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Navarra y Galáctica</title>
   <meta name="description" content="Guía de viaje familiar: Navarra y la experiencia Galáctica" />
-  <link rel="manifest" href="/manifest.json" />
-  <link rel="preload" href="/styles.css" as="style" />
-  <link rel="stylesheet" href="/styles.css" />
+  <link rel="manifest" href="manifest.json" />
+  <link rel="preload" href="styles.css" as="style" />
+  <link rel="stylesheet" href="styles.css" />
   <meta name="mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="theme-color" content="#2b6cb0" />
-  <link rel="apple-touch-icon" href="/assets/icons/icon-192.png" />
+  <link rel="apple-touch-icon" href="assets/icons/icon-192.png" />
 </head>
 <body>
   <header class="app-header">
     <div class="brand">
-      <img src="/images/camping_urobi.jpg" alt="logo" class="brand-img" />
+      <img src="images/camping_urobi.jpg" alt="logo" class="brand-img" />
       <div>
         <h1>Navarra · Galáctica</h1>
         <p class="subtitle">21–27 · 2 adultos + 1 niño</p>
@@ -83,13 +83,13 @@
 
   <script>
     const days = {
-      21:{title:'Día 21 — Llegada',desc:'Llegada y check-in.',img:'/images/camping_urobi.jpg'},
-      22:{title:'Día 22 — Selva de Irati',desc:'Ruta familiar y picnic.',img:'/images/irati.jpg'},
-      23:{title:'Día 23 — Roncesvalles',desc:'Colegiata y paseo.',img:'/images/roncesvalles.jpg'},
-      24:{title:'Día 24 — Pamplona',desc:'Casco Viejo y Taconera.',img:'/images/pamplona.jpg'},
-      25:{title:'Día 25 — Naturaleza',desc:'Excursión o relax.',img:'/images/isaba.jpg'},
-      26:{title:'Día 26 — Roncal y Galáctica',desc:'Museo del Pastor y observación.',img:'/images/galactica.jpg'},
-      27:{title:'Día 27 — Regreso',desc:'Salida hacia Alicante.',img:'/images/albarracin.jpg'}
+      21:{title:'Día 21 — Llegada',desc:'Llegada y check-in.',img:'images/camping_urobi.jpg'},
+      22:{title:'Día 22 — Selva de Irati',desc:'Ruta familiar y picnic.',img:'images/irati.jpg'},
+      23:{title:'Día 23 — Roncesvalles',desc:'Colegiata y paseo.',img:'images/roncesvalles.jpg'},
+      24:{title:'Día 24 — Pamplona',desc:'Casco Viejo y Taconera.',img:'images/pamplona.jpg'},
+      25:{title:'Día 25 — Naturaleza',desc:'Excursión o relax.',img:'images/isaba.jpg'},
+      26:{title:'Día 26 — Roncal y Galáctica',desc:'Museo del Pastor y observación.',img:'images/galactica.jpg'},
+      27:{title:'Día 27 — Regreso',desc:'Salida hacia Alicante.',img:'images/albarracin.jpg'}
     };
 
     function renderDays(){
@@ -123,7 +123,7 @@
         });
       });
       if('serviceWorker' in navigator){
-        navigator.serviceWorker.register('/service-worker.js').catch(()=>{});
+        navigator.serviceWorker.register('service-worker.js').catch(()=>{});
       }
     });
   </script>
