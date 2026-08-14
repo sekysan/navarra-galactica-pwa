@@ -1,4 +1,4 @@
-const CACHE_NAME = 'navarra-galactica-v4';
+const CACHE_NAME = 'navarra-galactica-v5';
 const PRECACHE = [
   './',
   './index.html',
