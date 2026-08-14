@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="g2" x1="0" x2="1">
+      <stop offset="0" stop-color="#2b6cb0"/>
+      <stop offset="1" stop-color="#1f4f8b"/>
+    </linearGradient>
+  </defs>
+  <rect width="100%" height="100%" rx="160" fill="url(#g2)"/>
+  <g fill="#fff" transform="translate(200,200)">
+    <circle cx="312" cy="160" r="120" />
+    <rect x="120" y="360" width="384" height="160" rx="40" />
+    <text x="312" y="460" font-family="Montserrat, Arial" font-size="72" font-weight="700" text-anchor="middle" fill="#1f4f8b">NG</text>
+  </g>
+</svg>
