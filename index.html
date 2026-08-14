@@ -4,155 +4,126 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Viaje familiar Navarra y Galáctica (21–27)</title>
-  <link rel="manifest" href="manifest.json" />
-  <link rel="stylesheet" href="styles.css" />
-  <meta name="theme-color" content="#2b6cb0"/>
+  <title>Navarra y Galáctica</title>
+  <meta name="description" content="Guía de viaje familiar: Navarra y la experiencia Galáctica" />
+  <link rel="manifest" href="/manifest.json" />
+  <link rel="stylesheet" href="/styles.css" />
+  <meta name="theme-color" content="#2b6cb0" />
+  <link rel="apple-touch-icon" href="/assets/icons/icon-192.png" />
 </head>
 <body>
-  <header class="hero">
-    <img src="images/camping_urobi.jpg" alt="Camping Urrobi" class="hero-img"/>
-    <div class="hero-text">
-      <h1>Viaje familiar Navarra y Galáctica</h1>
-      <p>21–27 · 2 adultos + 1 niño (6 años)</p>
-      <p><strong>Base:</strong> Camping Urrobi · <strong>Galáctica:</strong> 26 · 18:00 · Noche: Arcos de Campos</p>
+  <header class="app-header">
+    <div class="brand">
+      <img src="/images/camping_urobi.jpg" alt="logo" class="brand-img" />
+      <div>
+        <h1>Navarra · Galáctica</h1>
+        <p class="subtitle">21–27 · 2 adultos + 1 niño</p>
+      </div>
     </div>
+    <button id="menuBtn" class="icon-btn" aria-label="Menú">☰</button>
   </header>
 
-  <main class="container">
-    <section class="summary">
-      <h2>Resumen rápido</h2>
-      <p>Tipo: Naturaleza + ciudad (Pamplona) + astronomía. Transporte: coche categoría B. Prioridad: actividades; restaurantes económicos.</p>
-    </section>
+  <main class="app-main">
+    <section id="home" class="screen active">
+      <div class="cards">
+        <article class="card">
+          <h2>Resumen del viaje</h2>
+          <p>Base: Camping Urrobi · Prioridad: naturaleza, Pamplona y observación astronómica.</p>
+        </article>
 
-    <nav class="days-nav">
-      <button data-day="21">Día 21</button>
-      <button data-day="22">Día 22</button>
-      <button data-day="23">Día 23</button>
-      <button data-day="24">Día 24</button>
-      <button data-day="25">Día 25</button>
-      <button data-day="26">Día 26</button>
-      <button data-day="27">Día 27</button>
-    </nav>
+        <article class="card">
+          <h2>Próximo</h2>
+          <p id="next-activity">Día 21 — Llegada y check-in.</p>
+        </article>
 
-    <article id="day-template" class="day">
-      <h3 class="day-title"></h3>
-      <div class="day-grid">
-        <div><strong>Mañana</strong><p class="morning"></p></div>
-        <div><strong>Tarde</strong><p class="afternoon"></p></div>
-        <div><strong>Noche</strong><p class="night"></p></div>
-        <div><strong>Tiempos coche</strong><p class="times"></p></div>
-        <div><strong>Consejos</strong><p class="tips"></p></div>
+        <article class="card">
+          <h2>Rutas rápidas</h2>
+          <div class="routes-list">
+            <a class="route" href="https://www.google.com/maps/dir/?api=1&origin=Camping+Urobi+Navarra&destination=Selva+de+Irati" target="_blank">Irati</a>
+            <a class="route" href="https://www.google.com/maps/dir/?api=1&origin=Camping+Urobi+Navarra&destination=Pamplona" target="_blank">Pamplona</a>
+            <a class="route" href="https://www.google.com/maps/dir/?api=1&origin=Valle+del+Roncal&destination=Galactica+Arcos+de+las+Salinas" target="_blank">Galáctica</a>
+          </div>
+        </article>
       </div>
-      <div class="maps-links"></div>
-      <img class="day-img" src="" alt="imagen del día"/>
-    </article>
 
-    <section id="days-container"></section>
+      <h3 class="section-title">Itinerario por días</h3>
+      <div id="days-grid" class="grid"></div>
+    </section>
 
-    <section class="routes">
-      <h2>Rutas en coche</h2>
-      <ul>
-        <li><a class="gm" href="https://www.google.com/maps/dir/?api=1&origin=Camping+Urobi+Navarra&destination=Selva+de+Irati" target="_blank">Camping Urrobi → Selva de Irati</a></li>
-        <li><a class="gm" href="https://www.google.com/maps/dir/?api=1&origin=Camping+Urobi+Navarra&destination=Roncesvalles" target="_blank">Camping Urrobi → Roncesvalles</a></li>
-        <li><a class="gm" href="https://www.google.com/maps/dir/?api=1&origin=Camping+Urobi+Navarra&destination=Pamplona" target="_blank">Camping Urrobi → Pamplona</a></li>
-        <li><a class="gm" href="https://www.google.com/maps/dir/?api=1&origin=Camping+Urobi+Navarra&destination=Valle+del+Roncal" target="_blank">Camping Urrobi → Valle del Roncal</a></li>
-        <li><a class="gm" href="https://www.google.com/maps/dir/?api=1&origin=Valle+del+Roncal&destination=Galactica+Arcos+de+las+Salinas" target="_blank">Valle del Roncal → Galáctica</a></li>
-        <li><a class="gm" href="https://www.google.com/maps/dir/?api=1&origin=Galactica+Arcos+de+las+Salinas&destination=Arcos+de+Campos+Teruel" target="_blank">Galáctica → Arcos de Campos</a></li>
-        <li><a class="gm" href="https://www.google.com/maps/dir/?api=1&origin=Arcos+de+Campos+Teruel&destination=Alicante" target="_blank">Arcos de Campos → Alicante</a></li>
+    <section id="mapas" class="screen">
+      <h2>Rutas y mapas</h2>
+      <p>Abre en Google Maps para navegación paso a paso.</p>
+      <ul class="routes-full">
+        <li><a href="https://www.google.com/maps/dir/?api=1&origin=Camping+Urobi+Navarra&destination=Selva+de+Irati" target="_blank">Camping Urrobi → Selva de Irati</a></li>
+        <li><a href="https://www.google.com/maps/dir/?api=1&origin=Camping+Urobi+Navarra&destination=Roncesvalles" target="_blank">Camping Urrobi → Roncesvalles</a></li>
+        <li><a href="https://www.google.com/maps/dir/?api=1&origin=Camping+Urobi+Navarra&destination=Pamplona" target="_blank">Camping Urrobi → Pamplona</a></li>
       </ul>
     </section>
 
-    <section class="zbe">
-      <h2>Zonas de bajas emisiones (ZBE)</h2>
-      <p>Pamplona tiene restricciones en el centro. Recomendado aparcar en <strong>Pío XII</strong> o <strong>Baluarte</strong>.</p>
-    </section>
-
-    <section class="restaurants">
-      <h2>Restaurantes familiares y económicos</h2>
-      <h3>Pamplona</h3>
+    <section id="info" class="screen">
+      <h2>Información útil</h2>
+      <h3>ZBE</h3>
+      <p>Pamplona: aparcar en Pío XII o Baluarte para evitar restricciones.</p>
+      <h3>Plan lluvia</h3>
       <ul>
-        <li>La Mandarra de la Ramos</li>
-        <li>Bar Estafeta</li>
-        <li>Bares del Casco Viejo</li>
-      </ul>
-      <h3>Valle del Roncal / Isaba</h3>
-      <ul>
-        <li>Casa Etxea (Isaba)</li>
-        <li>Bar de Burgui</li>
-      </ul>
-      <h3>Teruel / Arcos de Campos</h3>
-      <ul>
-        <li>Mesón local en Arcos de Campos</li>
-        <li>Restaurante económico en Teruel</li>
-      </ul>
-    </section>
-
-    <section class="rain-plan">
-      <h2>Plan alternativo por lluvia</h2>
-      <ul>
-        <li>Pamplona: Catedral, Museo de Navarra</li>
-        <li>Roncal: Museo del Pastor</li>
-        <li>Camping: juegos de mesa, manualidades</li>
+        <li>Pamplona: Museo de Navarra, Catedral</li>
         <li>Teruel: Museo Provincial</li>
+        <li>Camping: juegos y manualidades</li>
       </ul>
     </section>
-
-    <footer class="footer">
-      <p>App creada para tu viaje familiar.</p>
-    </footer>
   </main>
 
+  <nav class="tabbar" role="navigation" aria-label="Navegación principal">
+    <button class="tab active" data-target="home">Inicio</button>
+    <button class="tab" data-target="mapas">Rutas</button>
+    <button class="tab" data-target="info">Info</button>
+  </nav>
+
   <script>
-  const days = {
-    21:{title:'Día 21 — Llegada al Camping Urrobi',morning:'Llegada y check-in.',afternoon:'Paseo por el río y piscina.',night:'Cena tranquila.',times:'Depende del origen.',tips:'Linterna para el niño.',img:'images/camping_urobi.jpg',maps:[]},
-    22:{title:'Día 22 — Selva de Irati',morning:'Ruta familiar en Irati.',afternoon:'Picnic y Ochagavía.',night:'Descanso.',times:'35–40 min.',tips:'Calzado cómodo.',img:'images/irati.jpg',maps:['https://www.google.com/maps/dir/?api=1&origin=Camping+Urobi+Navarra&destination=Selva+de+Irati']},
-    23:{title:'Día 23 — Roncesvalles + Aezkoa',morning:'Colegiata y Camino.',afternoon:'Orbaizeta y mirador.',night:'Cena en camping.',times:'15–20 min.',tips:'Cámara.',img:'images/roncesvalles.jpg',maps:['https://www.google.com/maps/dir/?api=1&origin=Camping+Urobi+Navarra&destination=Roncesvalles']},
-    24:{title:'Día 24 — Pamplona',morning:'Casco Viejo.',afternoon:'Encierro y Taconera.',night:'Regreso.',times:'45–50 min.',tips:'Evitar ZBE.',img:'images/pamplona.jpg',maps:['https://www.google.com/maps/dir/?api=1&origin=Camping+Urobi+Navarra&destination=Pamplona']},
-    25:{title:'Día 25 — Naturaleza',morning:'Relax o excursión.',afternoon:'Piscina o Quinto Real.',night:'Cena.',times:'',tips:'Flexibilidad.',img:'images/isaba.jpg',maps:[]},
-    26:{title:'Día 26 — Roncal + Galáctica',morning:'Roncal y Museo del Pastor.',afternoon:'Viaje a Galáctica.',night:'Noche en Arcos.',times:'2h15–2h30.',tips:'Llegar con margen.',img:'images/galactica.jpg',maps:['https://www.google.com/maps/dir/?api=1&origin=Valle+del+Roncal&destination=Galactica+Arcos+de+las+Salinas']},
-    27:{title:'Día 27 — Regreso',morning:'Salida hacia Alicante.',afternoon:'Albarracín opcional.',night:'Llegada.',times:'3h45–4h.',tips:'Paradas para el niño.',img:'images/albarracin.jpg',maps:['https://www.google.com/maps/dir/?api=1&origin=Arcos+de+Campos+Teruel&destination=Alicante']}
-  };
+    const days = {
+      21:{title:'Día 21 — Llegada',desc:'Llegada y check-in.',img:'/images/camping_urobi.jpg'},
+      22:{title:'Día 22 — Selva de Irati',desc:'Ruta familiar y picnic.',img:'/images/irati.jpg'},
+      23:{title:'Día 23 — Roncesvalles',desc:'Colegiata y paseo.',img:'/images/roncesvalles.jpg'},
+      24:{title:'Día 24 — Pamplona',desc:'Casco Viejo y Taconera.',img:'/images/pamplona.jpg'},
+      25:{title:'Día 25 — Naturaleza',desc:'Excursión o relax.',img:'/images/isaba.jpg'},
+      26:{title:'Día 26 — Roncal y Galáctica',desc:'Museo del Pastor y observación.',img:'/images/galactica.jpg'},
+      27:{title:'Día 27 — Regreso',desc:'Salida hacia Alicante.',img:'/images/albarracin.jpg'}
+    };
 
-  function renderDays(){
-    const container=document.getElementById('days-container');
-    Object.keys(days).forEach(k=>{
-      const d=days[k];
-      const article=document.getElementById('day-template').cloneNode(true);
-      article.id='day-'+k;
-      article.querySelector('.day-title').textContent=d.title;
-      article.querySelector('.morning').textContent=d.morning;
-      article.querySelector('.afternoon').textContent=d.afternoon;
-      article.querySelector('.night').textContent=d.night;
-      article.querySelector('.times').textContent=d.times;
-      article.querySelector('.tips').textContent=d.tips;
-      article.querySelector('.day-img').src=d.img;
-      const mapsDiv=article.querySelector('.maps-links');
-      d.maps.forEach(m=>{
-        const a=document.createElement('a');
-        a.href=m;a.target='_blank';a.textContent='Abrir en Google Maps';
-        mapsDiv.appendChild(a);
+    function renderDays(){
+      const grid=document.getElementById('days-grid');
+      Object.keys(days).forEach(k=>{
+        const d=days[k];
+        const card=document.createElement('article');
+        card.className='day-card card';
+        card.innerHTML=`
+          <img loading="lazy" decoding="async" src="${d.img}" alt="${d.title}" class="day-thumb">
+          <div class="day-body">
+            <h4>${d.title}</h4>
+            <p>${d.desc}</p>
+            <div class="day-actions">
+              <a class="btn" href="#">Detalles</a>
+              <a class="btn ghost" href="https://www.google.com/maps/dir/?api=1&origin=Camping+Urobi+Navarra&destination=${encodeURIComponent(d.title)}" target="_blank">Abrir mapa</a>
+            </div>
+          </div>`;
+        grid.appendChild(card);
       });
-      article.style.display='block';
-      container.appendChild(article);
-    });
-  }
+    }
 
-  document.addEventListener('DOMContentLoaded',()=>{
-    renderDays();
-    document.querySelectorAll('.days-nav button').forEach(btn=>{
-      btn.addEventListener('click',()=>{
-        const day=btn.getAttribute('data-day');
-        document.querySelectorAll('#days-container .day').forEach(el=>el.style.display='none');
-        document.getElementById('day-'+day).style.display='block';
+    document.addEventListener('DOMContentLoaded',()=>{
+      renderDays();
+      document.querySelectorAll('.tab').forEach(btn=>{
+        btn.addEventListener('click',()=>{
+          document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+          btn.classList.add('active');
+          document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+          document.getElementById(btn.dataset.target).classList.add('active');
+        });
       });
+      if('serviceWorker' in navigator){
+        navigator.serviceWorker.register('/service-worker.js').catch(()=>{});
+      }
     });
-    document.querySelector('.days-nav button[data-day="21"]').click();
-  });
-
-  if('serviceWorker' in navigator){
-    navigator.serviceWorker.register('service-worker.js');
-  }
   </script>
 </body>
 </html>
