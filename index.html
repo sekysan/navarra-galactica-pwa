@@ -144,5 +144,67 @@
         } catch (e){}
       })();
     </script>
+    <style>
+      #sw-update-banner{position:fixed;left:12px;right:12px;bottom:18px;background:#0b74de;color:#fff;padding:12px;border-radius:8px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 4px 12px rgba(0,0,0,.2);z-index:10000}
+      #sw-update-banner button{margin-left:8px;background:transparent;border:1px solid rgba(255,255,255,.2);color:#fff;padding:6px 10px;border-radius:6px}
+    </style>
+    <div id="sw-update-banner" style="display:none">
+      <div>Hay una nueva versión disponible.</div>
+      <div>
+        <button id="sw-update-refresh">Actualizar</button>
+        <button id="sw-update-dismiss">Cerrar</button>
+      </div>
+    </div>
+    <script>
+      (function(){
+        if (!('serviceWorker' in navigator)) return;
+        let registrationRef = null;
+        function showBanner(){
+          const b = document.getElementById('sw-update-banner');
+          b.style.display = 'flex';
+        }
+        function hideBanner(){
+          const b = document.getElementById('sw-update-banner');
+          b.style.display = 'none';
+        }
+        navigator.serviceWorker.addEventListener('message', evt => {
+          if (evt.data && evt.data.type === 'NEW_VERSION_AVAILABLE') {
+            showBanner();
+          }
+        });
+        navigator.serviceWorker.getRegistration().then(reg => {
+          if (!reg) return;
+          registrationRef = reg;
+          if (reg.waiting) {
+            showBanner();
+          }
+          reg.addEventListener('updatefound', () => {
+            const i = reg.installing;
+            if (!i) return;
+            i.addEventListener('statechange', () => {
+              if (i.state === 'installed' && reg.waiting) {
+                showBanner();
+              }
+            });
+          });
+        }).catch(()=>{});
+
+        document.getElementById('sw-update-refresh').addEventListener('click', ()=>{
+          navigator.serviceWorker.getRegistration().then(reg=>{
+            const waiting = reg && reg.waiting;
+            if (waiting) {
+              waiting.postMessage({type:'SKIP_WAITING'});
+              // when controller changes, reload
+              navigator.serviceWorker.addEventListener('controllerchange', ()=>{
+                window.location.reload();
+              });
+            } else {
+              window.location.reload();
+            }
+          }).catch(()=>window.location.reload());
+        });
+        document.getElementById('sw-update-dismiss').addEventListener('click', hideBanner);
+      })();
+    </script>
 </body>
 </html>

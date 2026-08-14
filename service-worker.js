@@ -12,9 +12,13 @@ const PRECACHE = [
 
 self.addEventListener('install', event => {
   event.waitUntil(
-    caches.open(CACHE_NAME).then(cache => cache.addAll(PRECACHE))
+    caches.open(CACHE_NAME).then(cache => cache.addAll(PRECACHE)).then(() => {
+      // Notify existing clients that a new version is available (waiting state)
+      return self.clients.matchAll({ includeUncontrolled: true }).then(clients => {
+        clients.forEach(c => c.postMessage({ type: 'NEW_VERSION_AVAILABLE' }));
+      });
+    })
   );
-  self.skipWaiting();
 });
 
 self.addEventListener('activate', event => {
