@@ -1,4 +1,4 @@
-const CACHE_NAME = 'navarra-galactica-v2';
+const CACHE_NAME = 'navarra-galactica-v3';
 const PRECACHE = [
   '/',
   '/index.html',
@@ -24,6 +24,13 @@ self.addEventListener('activate', event => {
     ))
   );
   self.clients.claim();
+});
+
+// Listen for skipWaiting messages from the page
+self.addEventListener('message', event => {
+  if (event.data && event.data.type === 'SKIP_WAITING') {
+    self.skipWaiting();
+  }
 });
 
 self.addEventListener('fetch', event => {

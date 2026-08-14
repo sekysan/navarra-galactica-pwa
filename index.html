@@ -127,5 +127,22 @@
       }
     });
   </script>
+    <script>
+      // Force a one-time unregister of old service workers and reload to get fresh content.
+      (function(){
+        if (!('serviceWorker' in navigator)) return;
+        try {
+          if (localStorage.getItem('sw_forced_update') === '1') return;
+          navigator.serviceWorker.getRegistrations().then(regs => {
+            if (!regs || regs.length === 0) return;
+            Promise.all(regs.map(r => r.unregister())).then(() => {
+              localStorage.setItem('sw_forced_update','1');
+              // reload with cache bypass
+              location.replace(location.pathname + '?sw=updated_' + Date.now());
+            }).catch(()=>{});
+          }).catch(()=>{});
+        } catch (e){}
+      })();
+    </script>
 </body>
 </html>
