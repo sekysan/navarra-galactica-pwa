@@ -1,13 +1,13 @@
-const CACHE_NAME = 'navarra-galactica-v3';
+const CACHE_NAME = 'navarra-galactica-v4';
 const PRECACHE = [
-  '/',
-  '/index.html',
-  '/offline.html',
-  '/styles.css',
-  '/manifest.json',
-  '/assets/icons/icon-192.png',
-  '/assets/icons/icon-512.png',
-  '/images/camping_urobi.jpg'
+  './',
+  './index.html',
+  './offline.html',
+  './styles.css',
+  './manifest.json',
+  './assets/icons/icon-192.png',
+  './assets/icons/icon-512.png',
+  './images/camping_urobi.jpg'
 ];
 
 self.addEventListener('install', event => {
@@ -27,7 +27,15 @@ self.addEventListener('activate', event => {
       keys.filter(k => k !== CACHE_NAME).map(k => caches.delete(k))
     ))
   );
+  // Take control of uncontrolled clients immediately.
   self.clients.claim();
+
+  // Notify clients that the new service worker is now active
+  event.waitUntil(
+    self.clients.matchAll({ includeUncontrolled: true }).then(clients => {
+      clients.forEach(c => c.postMessage({ type: 'NEW_VERSION_ACTIVATED' }));
+    })
+  );
 });
 
 // Listen for skipWaiting messages from the page
