@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {
   "name": "Viaje Navarra y Galáctica",
   "short_name": "NavarraGal",
@@ -13,3 +14,25 @@
     }
   ]
 }
+=======
+{
+  "name": "Navarra y Galáctica",
+  "short_name": "NavarraGal",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#2b6cb0",
+  "icons": [
+    {
+      "src": "assets/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
+>>>>>>> 568c7ea (Modern App UI)
