@@ -105,10 +105,10 @@
           <div class="day-body">
             <h4>${d.title}</h4>
             <p>${d.desc}</p>
-            <div class="day-actions">
-              <a class="btn" href="#">Detalles</a>
-              <a class="btn ghost" href="https://www.google.com/maps/dir/?api=1&origin=Camping+Urobi+Navarra&destination=${encodeURIComponent(d.title)}" target="_blank">Abrir mapa</a>
-            </div>
+                <div class="day-actions">
+                  <button class="btn details-btn" data-day="${k}">Detalles</button>
+                  <a class="btn ghost" href="https://www.google.com/maps/dir/?api=1&origin=Camping+Urobi+Navarra&destination=${encodeURIComponent(d.title)}" target="_blank">Abrir mapa</a>
+                </div>
           </div>`;
         grid.appendChild(card);
       });
@@ -208,5 +208,90 @@
         document.getElementById('sw-update-dismiss').addEventListener('click', hideBanner);
       })();
     </script>
+      <!-- Day details modal -->
+      <div id="day-modal" class="modal" aria-hidden="true">
+        <div class="modal-backdrop" data-dismiss="true"></div>
+        <div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+          <header class="modal-header">
+            <h3 id="modal-title">Detalles</h3>
+            <button id="modal-close" class="icon-btn" aria-label="Cerrar">✕</button>
+          </header>
+          <div class="modal-body">
+            <div class="modal-content-left">
+              <h4 id="modal-day-title"></h4>
+              <p id="modal-day-desc"></p>
+              <h5>Información de conducción y vehículo</h5>
+              <ul id="modal-driving-info">
+                <li>Coche: Renault Grand Scenic Diesel (Etiqueta B).</li>
+                <li>Peajes y autovías: A-31, A-3 / A-23 y A-15 / N-135 según ruta.</li>
+                <li>Acceso a Pamplona: zona centro con restricciones ZBE.</li>
+              </ul>
+              <h5>Plan día</h5>
+              <ol id="modal-day-plan">
+              </ol>
+            </div>
+            <aside class="modal-content-right">
+              <iframe id="modal-map" src="" frameborder="0" allowfullscreen></iframe>
+            </aside>
+          </div>
+        </div>
+      </div>
+      <style>
+        .modal{display:none;position:fixed;inset:0;z-index:12000;font-family:inherit}
+        .modal[aria-hidden="false"]{display:block}
+        .modal-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.45)}
+        .modal-panel{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);width:min(1000px,96%);max-height:90vh;background:#fff;border-radius:10px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 10px 30px rgba(0,0,0,.25)}
+        .modal-header{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;border-bottom:1px solid #eee}
+        .modal-body{display:flex;gap:12px;overflow:auto}
+        .modal-content-left{flex:1;padding:16px}
+        .modal-content-right{width:420px;max-width:45%;min-width:260px}
+        .modal-content-right iframe{width:100%;height:100%;min-height:360px;border:0}
+        .modal h4{margin:0 0 8px}
+        .modal p{margin:0 0 12px}
+        .modal ul, .modal ol{margin:0 0 12px 18px}
+        @media (max-width:800px){.modal-content-right{display:none}.modal-panel{width:96%}}
+      </style>
+      <script>
+        // Modal interaction: open when .details-btn clicked, populate with day info
+        document.addEventListener('click', function(e){
+          const btn = e.target.closest && e.target.closest('.details-btn');
+          if (btn){
+            const dayKey = btn.dataset.day;
+            const d = days[dayKey];
+            if (!d) return;
+            document.getElementById('modal-day-title').textContent = d.title;
+            document.getElementById('modal-day-desc').textContent = d.desc;
+            const plan = document.getElementById('modal-day-plan');
+            plan.innerHTML = '';
+            // sample plan items — customize per day if needed
+            const items = [
+              'Trayecto estimado: ~3h (según tráfico).',
+              'Parada: área de servicio para descanso y comida.',
+              'Actividad: paseo y visita al punto de interés local.'
+            ];
+            items.forEach(it=>{const li=document.createElement('li');li.textContent=it;plan.appendChild(li)});
+            // driving info can be extended per day
+            document.getElementById('modal-driving-info').style.display = 'block';
+            const map = document.getElementById('modal-map');
+            const q = encodeURIComponent(d.title + ' Navarra Spain');
+            map.src = 'https://www.google.com/maps?q=' + q + '&output=embed';
+            // show modal
+            const modal = document.getElementById('day-modal');
+            modal.setAttribute('aria-hidden','false');
+            // trap focus minimally
+            document.getElementById('modal-close').focus();
+          }
+        });
+        // close handlers
+        document.getElementById('modal-close').addEventListener('click', function(){
+          document.getElementById('day-modal').setAttribute('aria-hidden','true');
+        });
+        document.querySelector('.modal-backdrop').addEventListener('click', function(){
+          document.getElementById('day-modal').setAttribute('aria-hidden','true');
+        });
+        document.addEventListener('keydown', function(e){
+          if (e.key === 'Escape') document.getElementById('day-modal').setAttribute('aria-hidden','true');
+        });
+      </script>
 </body>
 </html>
