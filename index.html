@@ -101,7 +101,11 @@
           'Tarde: llegada al Camping Urrobi, check-in e instalación. Paseo tranquilo por los Prados de Espinal.',
           'Cena: en el restaurante del camping o picoteo en Espinal.'
         ],
-        mapQuery: 'San Vicente del Raspeig to Camping Urrobi Espinal Navarra'
+        mapQuery: 'San Vicente del Raspeig to Camping Urrobi Espinal Navarra',
+        directions: {
+          origin: 'San Vicente del Raspeig',
+          destination: 'Camping Urrobi, Ctra. Pamplona - Valcarlos, Km. 42, 31694 Espinal, Navarra'
+        }
       },
       22:{title:'Día 22 — Selva de Irati',desc:'Ruta familiar y picnic.',img:'images/irati.jpg'},
       23:{title:'Día 23 — Roncesvalles',desc:'Colegiata y paseo.',img:'images/roncesvalles.jpg'},
@@ -127,7 +131,35 @@
                   <a class="btn ghost" href="https://www.google.com/maps?q=${encodeURIComponent(d.mapQuery || d.title)}" target="_blank">Abrir mapa</a>
                 </div>
           </div>`;
-        grid.appendChild(card);
+          // append actions programmatically to build correct map/directions links
+          const actions = document.createElement('div');
+          actions.className = 'day-actions';
+          // Details button
+          const detailsBtn = document.createElement('button');
+          detailsBtn.className = 'btn details-btn';
+          detailsBtn.dataset.day = k;
+          detailsBtn.textContent = 'Detalles';
+          // Map link (generic query)
+          const mapLink = document.createElement('a');
+          mapLink.className = 'btn ghost';
+          mapLink.target = '_blank';
+          mapLink.href = 'https://www.google.com/maps?q=' + encodeURIComponent(d.mapQuery || d.title);
+          mapLink.textContent = 'Abrir mapa';
+          // Directions link (maps/dir) - prefer explicit origin/destination if provided
+          const dirLink = document.createElement('a');
+          dirLink.className = 'btn ghost';
+          dirLink.target = '_blank';
+          const origin = (d.directions && d.directions.origin) ? d.directions.origin : 'Camping Urobi Navarra';
+          const destination = (d.directions && d.directions.destination) ? d.directions.destination : d.title;
+          dirLink.href = 'https://www.google.com/maps/dir/?api=1&origin=' + encodeURIComponent(origin) + '&destination=' + encodeURIComponent(destination);
+          dirLink.textContent = 'Abrir direcciones';
+
+          const actionContainer = card.querySelector('.day-actions');
+          actionContainer.appendChild(detailsBtn);
+          actionContainer.appendChild(mapLink);
+          actionContainer.appendChild(dirLink);
+
+          grid.appendChild(card);
       });
     }
 
@@ -249,6 +281,9 @@
             </div>
             <aside class="modal-content-right">
               <iframe id="modal-map" src="" frameborder="0" allowfullscreen></iframe>
+              <div style="margin-top:8px">
+                <a id="modal-directions" class="btn ghost" target="_blank" href="#">Abrir direcciones</a>
+              </div>
             </aside>
           </div>
         </div>
@@ -303,6 +338,11 @@
             const map = document.getElementById('modal-map');
             const q = encodeURIComponent(d.mapQuery || (d.title + ' Navarra Spain'));
             map.src = 'https://www.google.com/maps?q=' + q + '&output=embed';
+            // set modal directions link
+            const modalDir = document.getElementById('modal-directions');
+            const origin = (d.directions && d.directions.origin) ? d.directions.origin : 'Camping Urobi Navarra';
+            const destination = (d.directions && d.directions.destination) ? d.directions.destination : d.title;
+            modalDir.href = 'https://www.google.com/maps/dir/?api=1&origin=' + encodeURIComponent(origin) + '&destination=' + encodeURIComponent(destination);
             // show modal
             const modal = document.getElementById('day-modal');
             modal.setAttribute('aria-hidden','false');
