@@ -103,8 +103,8 @@
         ],
         mapQuery: 'San Vicente del Raspeig to Camping Urrobi Espinal Navarra',
         directions: {
-          origin: 'San Vicente del Raspeig',
-          destination: 'Camping Urrobi, Ctra. Pamplona - Valcarlos, Km. 42, 31694 Espinal, Navarra'
+          origin: 'San Vicente del Raspeig, Alicante, Spain',
+          destination: 'Camping Urrobi, Ctra. Pamplona - Valcarlos, Km. 42, 31694 Espinal, Navarra, Spain'
         }
       },
       22:{title:'Día 22 — Selva de Irati',desc:'Ruta familiar y picnic.',img:'images/irati.jpg'},
@@ -144,15 +144,15 @@
           mapLink.className = 'btn ghost';
           mapLink.target = '_blank';
           mapLink.href = 'https://www.google.com/maps?q=' + encodeURIComponent(d.mapQuery || d.title);
-          mapLink.textContent = 'Abrir mapa';
+          mapLink.textContent = 'Ver mapa';
           // Directions link (maps/dir) - prefer explicit origin/destination if provided
           const dirLink = document.createElement('a');
           dirLink.className = 'btn ghost';
           dirLink.target = '_blank';
           const origin = (d.directions && d.directions.origin) ? d.directions.origin : 'Camping Urobi Navarra';
           const destination = (d.directions && d.directions.destination) ? d.directions.destination : d.title;
-          dirLink.href = 'https://www.google.com/maps/dir/?api=1&origin=' + encodeURIComponent(origin) + '&destination=' + encodeURIComponent(destination);
-          dirLink.textContent = 'Abrir direcciones';
+          dirLink.href = 'https://www.google.com/maps/dir/?api=1&origin=' + encodeURIComponent(origin) + '&destination=' + encodeURIComponent(destination) + '&travelmode=driving';
+          dirLink.textContent = 'Ver ruta';
 
           const actionContainer = card.querySelector('.day-actions');
           actionContainer.appendChild(detailsBtn);
@@ -282,7 +282,7 @@
             <aside class="modal-content-right">
               <iframe id="modal-map" src="" frameborder="0" allowfullscreen></iframe>
               <div style="margin-top:8px">
-                <a id="modal-directions" class="btn ghost" target="_blank" href="#">Abrir direcciones</a>
+                <a id="modal-directions" class="btn ghost" target="_blank" href="#">Ver ruta</a>
               </div>
             </aside>
           </div>
@@ -342,7 +342,7 @@
             const modalDir = document.getElementById('modal-directions');
             const origin = (d.directions && d.directions.origin) ? d.directions.origin : 'Camping Urobi Navarra';
             const destination = (d.directions && d.directions.destination) ? d.directions.destination : d.title;
-            modalDir.href = 'https://www.google.com/maps/dir/?api=1&origin=' + encodeURIComponent(origin) + '&destination=' + encodeURIComponent(destination);
+            modalDir.href = 'https://www.google.com/maps/dir/?api=1&origin=' + encodeURIComponent(origin) + '&destination=' + encodeURIComponent(destination) + '&travelmode=driving';
             // show modal
             const modal = document.getElementById('day-modal');
             modal.setAttribute('aria-hidden','false');
