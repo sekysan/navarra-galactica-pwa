@@ -87,7 +87,7 @@
     const days = {
       21:{
         title:'Día 21 — Salida desde San Vicente del Raspeig y llegada al Camping Urrobi',
-        desc:'Salida desde San Vicente del Raspeig por la mañana; jornada de carretera con paradas programadas. Llegada al Camping Urrobi por la tarde, check-in y paseo tranquilo por Espinal. Cena en el restaurante del camping o en el pueblo.',
+        desc:'Salida desde San Vicente del Raspeig por la mañana; jornada de carretera con paradas programadas. Llegada al Camping Urrobi por la tarde, check-in y paseo tranquilo por Espinal. Nos alojaremos en el camping hasta el día 26. Cena en el restaurante del camping o en el pueblo.',
         img:'images/camping_urobi.jpg',
         drivingInfo:[
           'Coche: Renault Grand Scenic Diesel (Etiqueta ambiental B).',
@@ -101,7 +101,7 @@
           'Tarde: llegada al Camping Urrobi, check-in e instalación. Paseo tranquilo por los Prados de Espinal.',
           'Cena: en el restaurante del camping o picoteo en Espinal.'
         ],
-        mapQuery: 'Camping Urrobi Espinal Navarra'
+        mapQuery: 'San Vicente del Raspeig to Camping Urrobi Espinal Navarra'
       },
       22:{title:'Día 22 — Selva de Irati',desc:'Ruta familiar y picnic.',img:'images/irati.jpg'},
       23:{title:'Día 23 — Roncesvalles',desc:'Colegiata y paseo.',img:'images/roncesvalles.jpg'},
@@ -124,7 +124,7 @@
             <p>${d.desc}</p>
                 <div class="day-actions">
                   <button class="btn details-btn" data-day="${k}">Detalles</button>
-                  <a class="btn ghost" href="https://www.google.com/maps/dir/?api=1&origin=Camping+Urobi+Navarra&destination=${encodeURIComponent(d.title)}" target="_blank">Abrir mapa</a>
+                  <a class="btn ghost" href="https://www.google.com/maps?q=${encodeURIComponent(d.mapQuery || d.title)}" target="_blank">Abrir mapa</a>
                 </div>
           </div>`;
         grid.appendChild(card);
