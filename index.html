@@ -85,7 +85,24 @@
 
   <script>
     const days = {
-      21:{title:'Día 21 — Llegada',desc:'Llegada y check-in.',img:'images/camping_urobi.jpg'},
+      21:{
+        title:'Día 21 — Salida desde San Vicente del Raspeig y llegada al Camping Urrobi',
+        desc:'Salida desde San Vicente del Raspeig por la mañana; jornada de carretera con paradas programadas. Llegada al Camping Urrobi por la tarde, check-in y paseo tranquilo por Espinal. Cena en el restaurante del camping o en el pueblo.',
+        img:'images/camping_urobi.jpg',
+        drivingInfo:[
+          'Coche: Renault Grand Scenic Diesel (Etiqueta ambiental B).',
+          'Peajes y autovías: A-31, A-3 / A-23 y A-15 / N-135 según tramo.',
+          'Acceso a Pamplona: el casco histórico tiene restricciones ZBE; opción: Parking subterráneo Plaza del Castillo o Parking Trinitarios y subir en ascensor urbano.'
+        ],
+        plan:[
+          'Trayecto estimado en coche: ≈730 km (~7 horas de conducción efectiva).',
+          'Parada 1 (~2 h 15 min / km 220): Área de servicio en la A-31 (La Gineta / Albacete) — estirar piernas y desayuno.',
+          'Parada 2 (~4 h 30 min / km 460): Parada para comer cerca de Zaragoza / Cariñena (A-23).',
+          'Tarde: llegada al Camping Urrobi, check-in e instalación. Paseo tranquilo por los Prados de Espinal.',
+          'Cena: en el restaurante del camping o picoteo en Espinal.'
+        ],
+        mapQuery: 'Camping Urrobi Espinal Navarra'
+      },
       22:{title:'Día 22 — Selva de Irati',desc:'Ruta familiar y picnic.',img:'images/irati.jpg'},
       23:{title:'Día 23 — Roncesvalles',desc:'Colegiata y paseo.',img:'images/roncesvalles.jpg'},
       24:{title:'Día 24 — Pamplona',desc:'Casco Viejo y Taconera.',img:'images/pamplona.jpg'},
@@ -263,17 +280,28 @@
             document.getElementById('modal-day-desc').textContent = d.desc;
             const plan = document.getElementById('modal-day-plan');
             plan.innerHTML = '';
-            // sample plan items — customize per day if needed
-            const items = [
-              'Trayecto estimado: ~3h (según tráfico).',
-              'Parada: área de servicio para descanso y comida.',
-              'Actividad: paseo y visita al punto de interés local.'
-            ];
-            items.forEach(it=>{const li=document.createElement('li');li.textContent=it;plan.appendChild(li)});
-            // driving info can be extended per day
-            document.getElementById('modal-driving-info').style.display = 'block';
+            // use per-day plan if available
+            if (Array.isArray(d.plan) && d.plan.length){
+              d.plan.forEach(it=>{const li=document.createElement('li');li.textContent=it;plan.appendChild(li)});
+            } else {
+              const items = [
+                'Trayecto estimado: ~3h (según tráfico).',
+                'Parada: área de servicio para descanso y comida.',
+                'Actividad: paseo y visita al punto de interés local.'
+              ];
+              items.forEach(it=>{const li=document.createElement('li');li.textContent=it;plan.appendChild(li)});
+            }
+            // populate driving info list
+            const driveList = document.getElementById('modal-driving-info');
+            driveList.innerHTML = '';
+            if (Array.isArray(d.drivingInfo) && d.drivingInfo.length){
+              d.drivingInfo.forEach(it=>{const li=document.createElement('li');li.textContent=it;driveList.appendChild(li)});
+            } else {
+              const defaultDrive = ['Coche: información no disponible.','Recomendado: comprobar el estado de carreteras y peajes.'];
+              defaultDrive.forEach(it=>{const li=document.createElement('li');li.textContent=it;driveList.appendChild(li)});
+            }
             const map = document.getElementById('modal-map');
-            const q = encodeURIComponent(d.title + ' Navarra Spain');
+            const q = encodeURIComponent(d.mapQuery || (d.title + ' Navarra Spain'));
             map.src = 'https://www.google.com/maps?q=' + q + '&output=embed';
             // show modal
             const modal = document.getElementById('day-modal');
